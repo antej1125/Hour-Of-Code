@@ -38,8 +38,13 @@ void UActorMoverComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
    float DistanceToTarget = FVector::Distance(CurrentLocation, EndPoint);
    float LerpDistance = DistanceToMove / 6.0f;
    float PlatformSpeed;
-   float SlowSpeed = Speed / 8.0f;
+   float SlowSpeed;
    float alpha = LerpDistance / DistanceToMove;
+
+   if (EnableSlow)
+      SlowSpeed = Speed / 8.0f;
+   else
+      SlowSpeed = Speed;
 
    if ((FVector::Distance(CurrentLocation, EndPoint) >= LerpDistance) ||
       (FVector::Distance(CurrentLocation, StartLocation) <= LerpDistance))
